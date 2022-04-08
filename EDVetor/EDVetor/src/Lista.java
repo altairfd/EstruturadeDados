@@ -1,33 +1,22 @@
-import java.util.Arrays;
+import java.lang.reflect.Array;
 
-public class Vetor {
-    private String[] elementos;
+public class Lista<T> {
+    
+    private T[] elementos;
     private int tamanho;
+    
 
-    public Vetor(int capacidade){
-        elementos = new String[capacidade];
+    public Lista(int capacidade){
+        elementos = (T[]) new Object[capacidade];
         tamanho = 0;
     }
 
-    /*ublic void adiciona(String elemento) {
-        for(int i=0; i< elementos.length; i++) {
-            if(elementos[i] == null) {
-                elementos[i] = elemento;
-                break;
-            }
-        }
-    }*/
+    public Lista(int capacidade, Class<T> tipoClasse){
+        this.elementos = (T[]) Array.newInstance(tipoClasse, capacidade);
+        this.tamanho = 0;
+    } 
 
-   /* public void adiciona(String elemento) throws Exception {
-        if(tamanho < elementos.length) {
-            elementos[tamanho] = elemento;
-            tamanho++;
-        } else {
-            throw new Exception("Vetor está cheio");
-        }
-    }*/
-
-    public boolean adiciona(String elemento) {
+    public boolean adiciona(T elemento) {
         this.aumentarTamanho();
         if(tamanho < elementos.length) {
             elementos[tamanho] = elemento;
@@ -41,14 +30,14 @@ public class Vetor {
         return tamanho;
     }
 
-    public String buscar(int posicao) throws IllegalAccessException {
+    public Object buscar(int posicao) throws IllegalAccessException {
         if(!(posicao >= 0 && posicao < tamanho)) {
             throw new IllegalAccessException("Posição invalida");
         }
         return elementos[posicao]; 
     }
 
-    public int buscar(String elemento) {
+    public int buscar(T elemento) {
         for(int i = 0; i < tamanho; i++) {
             if(elementos[i].equals(elemento)) {
                 return i;
@@ -57,7 +46,7 @@ public class Vetor {
         return -1;
     }
 
-    public boolean adicionar(int posicao, String elemento) throws IllegalAccessException {
+    public boolean adicionar(int posicao, T elemento) throws IllegalAccessException {
         if(!(posicao >= 0 && posicao < tamanho)) {
             throw new IllegalAccessException("Posçao invalida");
         }
@@ -85,7 +74,7 @@ public class Vetor {
 
     private void aumentarTamanho() {
         if(tamanho == elementos.length) {
-            String[] elementosNovos = new String[elementos.length+2]; {
+            T[] elementosNovos = (T[]) new Object[elementos.length+2]; {
                 for(int i= 0; i < elementos.length; i++) {
                     elementosNovos[i] = elementos[i];
                 }
@@ -113,4 +102,5 @@ public class Vetor {
         s.append("]");
         return s.toString();
     }
+
 }

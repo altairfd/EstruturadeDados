@@ -1,33 +1,13 @@
-import java.util.Arrays;
-
-public class Vetor {
-    private String[] elementos;
+public class VetorObjeto {
+    private Object[] elementos;
     private int tamanho;
 
-    public Vetor(int capacidade){
+    public VetorObjeto(int capacidade){
         elementos = new String[capacidade];
         tamanho = 0;
     }
 
-    /*ublic void adiciona(String elemento) {
-        for(int i=0; i< elementos.length; i++) {
-            if(elementos[i] == null) {
-                elementos[i] = elemento;
-                break;
-            }
-        }
-    }*/
-
-   /* public void adiciona(String elemento) throws Exception {
-        if(tamanho < elementos.length) {
-            elementos[tamanho] = elemento;
-            tamanho++;
-        } else {
-            throw new Exception("Vetor está cheio");
-        }
-    }*/
-
-    public boolean adiciona(String elemento) {
+    public boolean adiciona(Object elemento) {
         this.aumentarTamanho();
         if(tamanho < elementos.length) {
             elementos[tamanho] = elemento;
@@ -41,14 +21,14 @@ public class Vetor {
         return tamanho;
     }
 
-    public String buscar(int posicao) throws IllegalAccessException {
+    public Object buscar(int posicao) throws IllegalAccessException {
         if(!(posicao >= 0 && posicao < tamanho)) {
             throw new IllegalAccessException("Posição invalida");
         }
         return elementos[posicao]; 
     }
 
-    public int buscar(String elemento) {
+    public int buscar(Object elemento) {
         for(int i = 0; i < tamanho; i++) {
             if(elementos[i].equals(elemento)) {
                 return i;
@@ -57,7 +37,7 @@ public class Vetor {
         return -1;
     }
 
-    public boolean adicionar(int posicao, String elemento) throws IllegalAccessException {
+    public boolean adicionar(int posicao, Object elemento) throws IllegalAccessException {
         if(!(posicao >= 0 && posicao < tamanho)) {
             throw new IllegalAccessException("Posçao invalida");
         }
@@ -85,7 +65,7 @@ public class Vetor {
 
     private void aumentarTamanho() {
         if(tamanho == elementos.length) {
-            String[] elementosNovos = new String[elementos.length+2]; {
+            Object[] elementosNovos = new Object[elementos.length+2]; {
                 for(int i= 0; i < elementos.length; i++) {
                     elementosNovos[i] = elementos[i];
                 }
